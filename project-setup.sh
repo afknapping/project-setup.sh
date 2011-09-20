@@ -7,8 +7,13 @@
 
 # see http://stackoverflow.com/questions/5792707/cannot-change-rvm-gemset-from-shell-script-via-rvm-gemset-use/6584010#6584010
 
+# read gems < ./config
+
 clear
-read gems < config
+
+gems=`cut -d: -f2 ./config`
+folder=`cut -d: -f3 ./config`
+
 echo " "
 echo -n "enter project name or working title: "
 read projectname
@@ -21,7 +26,7 @@ touch readme.txt
 echo "$projectname by $USER" >> readme
 date >> readme
 echo "created readme.txt"
-mkdir copy conception design archive doc rawmaterial research temp
+mkdir $folder
 echo "created sub directories: copy conception design  archive doc research temp rawmaterial"
 echo " "
 rvm list
@@ -35,7 +40,7 @@ rvm use ruby_ver@$projectname
 
 
 echo "installing gems from config: $gems"
-gem $gems --no-rdoc --no-ri
+gem install $gems --no-rdoc --no-ri
 
 
 heroku keys:add

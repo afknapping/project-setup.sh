@@ -1,1 +1,1 @@
-install bundler rake heroku sinatra thin rdiscount haml sass rack
+:bundler rake heroku sinatra thin rdiscount haml sass rack :copy conception design  archive doc research temp rawmaterial
