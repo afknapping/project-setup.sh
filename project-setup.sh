@@ -8,6 +8,7 @@
 # see http://stackoverflow.com/questions/5792707/cannot-change-rvm-gemset-from-shell-script-via-rvm-gemset-use/6584010#6584010
 
 clear
+read gems < config
 echo " "
 echo -n "enter project name or working title: "
 read projectname
@@ -27,11 +28,16 @@ rvm list
 echo "which ruby?"
 read ruby_ver
 rvm use $ruby_ver
+
 # echo "using $ruby_ver"
 rvm gemset create $projectname
 rvm use ruby_ver@$projectname
-echo "installing bundler, rake, heroku"
-gem install bundler rake heroku --no-rdoc --no-ri
+
+
+echo "installing gems from config: $gems"
+gem $gems --no-rdoc --no-ri
+
+
 heroku keys:add
 echo " "
 # rvm gemset list   # for debugging
